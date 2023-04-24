@@ -25,5 +25,23 @@
             var nyttTillegg = new Lagerbeholdning(Drikke, antall);
             Lager.Add(nyttTillegg);
         }
+        public void BuyStuff(Drikke drikke)
+        {
+            if (Saldo < drikke.Pris)
+            {
+                Console.WriteLine("IKKE NOK SALDO!");
+                return;
+            }
+            else if (Lager[drikke.ID].Antall == 0)
+            {
+                Console.WriteLine("UTSOLGT");
+            }
+            else if (Saldo >= drikke.Pris && Lager[drikke.ID].Antall > 0)
+            {
+                Saldo -= drikke.Pris;
+                Lager[drikke.ID].Antall--;
+                Console.WriteLine("Du har kjøpt en " + drikke.Navn);
+            }
+        }
     }
 }
