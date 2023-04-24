@@ -20,5 +20,10 @@
             Console.WriteLine("Du fikk tilbake " + Saldo);
             Saldo -= Saldo;
         }
+        public void AddToLager(Drikke Drikke, int antall)
+        {
+            var nyttTillegg = new Lagerbeholdning(Drikke, antall);
+            Lager.Add(nyttTillegg);
+        }
     }
 }
