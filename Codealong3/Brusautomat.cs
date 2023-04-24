@@ -3,12 +3,13 @@
     public class Brusautomat
     {
         public int Saldo { get; private set; }
-        public List<Drikke> Utvalg { get; private set; }
+        public List<Drikke> Utvalg = new List<Drikke>();
         public Brusautomat()
         {
             Saldo = 0;
-            Utvalg = new List<Drikke>();
         }
+        public List<Lagerbeholdning> Lager = new List<Lagerbeholdning>();
+
         public void ØkSaldo(int mynt)
         {
             Saldo += mynt;

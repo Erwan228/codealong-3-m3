@@ -8,12 +8,21 @@
             Brusautomat.ØkSaldo(20);
             Brusautomat.ØkSaldo(5);
             Brusautomat.ReturnerSaldo();
-            var drikke1 = new Drikke("Solo", 25);
-            var drikke2 = new Drikke("Cola", 35);
-            var drikke3 = new Drikke("Farris", 5);
-            var drikke4 = new Drikke("Vann", 1025);
-            var drikke5 = new Drikke("Øl", 75);
-            var drikke6 = new Drikke("Monster", 30);
+            var Solo = new Drikke("Solo", 25);
+            var Cola = new Drikke("Cola", 35);
+            var Farris = new Drikke("Farris", 5);
+            var Vann = new Drikke("Vann", 1025);
+            var Øl = new Drikke("Øl", 75);
+            var Monster = new Drikke("Monster", 30);
+            Brusautomat.Utvalg.Add(Solo);
+            Brusautomat.Utvalg.Add(Farris);
+            Brusautomat.Utvalg.Add(Vann);
+            Brusautomat.Utvalg.Add(Øl);
+            Brusautomat.Utvalg.Add(Monster);
+            foreach (Drikke drikke in Brusautomat.Utvalg)
+            {
+                Console.WriteLine($"{drikke.Navn} koster {drikke.Pris}kr!");
+            }
         }
     }
 }
