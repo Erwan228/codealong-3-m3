@@ -20,6 +20,14 @@
             Console.WriteLine("Du fikk tilbake " + Saldo);
             Saldo -= Saldo;
         }
+        public Brusautomat AddDrink(string navn, int pris, int id, int antall)
+        {
+            var drikke = new Drikke(navn, pris, id);
+            AddToLager(drikke, antall);
+            Utvalg.Add(drikke);
+            return this;
+
+        }
         public void AddToLager(Drikke Drikke, int antall)
         {
             var nyttTillegg = new Lagerbeholdning(Drikke, antall);
