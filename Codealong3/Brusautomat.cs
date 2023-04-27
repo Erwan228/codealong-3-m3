@@ -2,53 +2,88 @@
 {
     public class Brusautomat
     {
-        public int Saldo { get; private set; }
+        private int _saldo { get; set; }
         public List<Drikke> Utvalg = new List<Drikke>();
         public Brusautomat()
         {
-            Saldo = 0;
+            _saldo = 0;
         }
         public List<Lagerbeholdning> Lager = new List<Lagerbeholdning>();
 
         public void ØkSaldo(int mynt)
         {
-            Saldo += mynt;
+            _saldo += mynt;
             Console.WriteLine($"Du la på {mynt}");
         }
         public void ReturnerSaldo()
         {
-            Console.WriteLine("Du fikk tilbake " + Saldo);
-            Saldo -= Saldo;
+            Console.WriteLine("Du fikk tilbake " + _saldo);
+            _saldo -= _saldo;
         }
-        public Brusautomat AddDrink(string navn, int pris, int id, int antall)
+        public Brusautomat AddDrink(string navn, int pris, int antall)
         {
-            var drikke = new Drikke(navn, pris, id);
+            var drikke = new Drikke(navn, pris);
             AddToLager(drikke, antall);
             Utvalg.Add(drikke);
             return this;
 
         }
-        public void AddToLager(Drikke Drikke, int antall)
+        public void AddToLager(Drikke drikke, int antall)
         {
-            var nyttTillegg = new Lagerbeholdning(Drikke, antall);
+            var nyttTillegg = new Lagerbeholdning(drikke, antall);
             Lager.Add(nyttTillegg);
         }
-        public void BuyStuff(Drikke drikke)
+        public void ViseUtvalg()
         {
-            if (Saldo < drikke.Pris)
+            foreach (var item in Utvalg)
+            {
+                Console.WriteLine($"{item.Navn} koster {item.Pris}kr!");
+            }
+        }
+        public void ViseLager()
+        {
+            foreach (var produkt in Lager)
+            {
+                Console.WriteLine($"{produkt.Antall} {produkt.Drikke.Navn}");
+            }
+        }
+        public void VisProdukter(bool visPris, bool visLagerbeholdning)
+        {
+            if (visPris) ViseUtvalg();
+            if (visLagerbeholdning) ViseLager();
+        }
+        public void BuyStuff(string navn)
+        {
+            var id = 0;
+            bool haveDrink = false;
+            foreach (var drink in Lager)
+            {
+                if (drink.Drikke.Navn == navn && drink.Antall > 0)
+                {
+                    haveDrink = true;
+                    break;
+
+                }
+                else id++;
+            };
+
+            if (haveDrink) { HaveDrink(navn, id); }
+            else { Console.WriteLine("Har ikke drikken"); };
+        }
+        public void HaveDrink(string navn, int id)
+        {
+            if (_saldo < Lager[id].Drikke.Pris)
             {
                 Console.WriteLine("IKKE NOK SALDO!");
+                Console.WriteLine(id);
                 return;
             }
-            else if (Lager[drikke.ID].Antall == 0)
+
+            else if (_saldo >= Lager[id].Drikke.Pris)
             {
-                Console.WriteLine("UTSOLGT");
-            }
-            else if (Saldo >= drikke.Pris && Lager[drikke.ID].Antall > 0)
-            {
-                Saldo -= drikke.Pris;
-                Lager[drikke.ID].Antall--;
-                Console.WriteLine("Du har kjøpt en " + drikke.Navn);
+                _saldo -= Lager[id].Drikke.Pris;
+                Lager[id].Antall--;
+                Console.WriteLine("Du har kjøpt en " + Lager[id].Drikke.Navn);
             }
         }
     }
