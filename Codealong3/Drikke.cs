@@ -2,12 +2,24 @@
 {
     public class Drikke
     {
-        public string Navn { get; private set; }
-        public int Pris { get; private set; }
+        private string _navn { get; set; }
+        private int _pris { get; set; }
         public Drikke(string navn, int pris)
         {
-            Navn = navn;
-            Pris = pris;
+            _navn = navn;
+            _pris = pris;
+        }
+        public void Show()
+        {
+            Console.WriteLine($"{_navn} koster {_pris}kr!");
+        }
+        public string GetNavn()
+        {
+            return _navn.ToString();
+        }
+        public int GetPris()
+        {
+            return _pris;
         }
     }
 }

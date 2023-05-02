@@ -3,11 +3,19 @@
     public class Lagerbeholdning
     {
         public Drikke Drikke { get; }
-        public int Antall { get; set; }
+        private int _antall { get; set; }
         public Lagerbeholdning(Drikke drikke, int antall)
         {
             Drikke = drikke;
-            Antall = antall;
+            _antall = antall;
+        }
+        public int GetAntall()
+        {
+            return _antall;
+        }
+        public void MindreAntall()
+        {
+            _antall--;
         }
     }
 }

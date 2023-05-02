@@ -37,14 +37,14 @@
         {
             foreach (var item in Utvalg)
             {
-                Console.WriteLine($"{item.Navn} koster {item.Pris}kr!");
+                item.Show();
             }
         }
         public void ViseLager()
         {
             foreach (var produkt in Lager)
             {
-                Console.WriteLine($"{produkt.Antall} {produkt.Drikke.Navn}");
+                Console.WriteLine($"{produkt.GetAntall()} {produkt.Drikke.GetNavn()}");
             }
         }
         public void VisProdukter(bool visPris, bool visLagerbeholdning)
@@ -58,7 +58,7 @@
             bool haveDrink = false;
             foreach (var drink in Lager)
             {
-                if (drink.Drikke.Navn == navn && drink.Antall > 0)
+                if (drink.Drikke.GetNavn() == navn && drink.GetAntall() > 0)
                 {
                     haveDrink = true;
                     break;
@@ -72,18 +72,18 @@
         }
         public void HaveDrink(string navn, int id)
         {
-            if (_saldo < Lager[id].Drikke.Pris)
+            if (_saldo < Lager[id].Drikke.GetPris())
             {
                 Console.WriteLine("IKKE NOK SALDO!");
                 Console.WriteLine(id);
                 return;
             }
 
-            else if (_saldo >= Lager[id].Drikke.Pris)
+            else if (_saldo >= Lager[id].Drikke.GetPris())
             {
-                _saldo -= Lager[id].Drikke.Pris;
-                Lager[id].Antall--;
-                Console.WriteLine("Du har kjøpt en " + Lager[id].Drikke.Navn);
+                _saldo -= Lager[id].Drikke.GetPris();
+                Lager[id].MindreAntall();
+                Console.WriteLine("Du har kjøpt en " + Lager[id].Drikke.GetNavn());
             }
         }
     }
