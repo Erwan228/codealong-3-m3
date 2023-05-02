@@ -13,9 +13,9 @@
         {
             return _antall;
         }
-        public void MindreAntall()
+        public void MindreAntall(int reduce)
         {
-            _antall--;
+            _antall -= reduce;
         }
     }
 }

@@ -82,7 +82,7 @@
             else if (_saldo >= Lager[id].Drikke.GetPris())
             {
                 _saldo -= Lager[id].Drikke.GetPris();
-                Lager[id].MindreAntall();
+                Lager[id].MindreAntall(1);
                 Console.WriteLine("Du har kjøpt en " + Lager[id].Drikke.GetNavn());
             }
         }
